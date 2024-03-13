@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Onepagerules - Deathball</title>
+<!-- Colors and index customization -->    
+    <style>    
+        img.small {
+            width: 150px;
+            height: auto;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }                   
+    </style>    
+</head>
+<body>
+
+<!-- Buttons and links -->
+    <div align="center">
+        <h1>Onepagerules - Deathball </h1>
+            <button onclick="activate2d6(6, 2)" class="button" ><i class='fas fa-dice-d20'></i> Activate unit (2D6)</button>
+            <button onclick="activate3d6(6, 3)" class="button" ><i class='fas fa-dice-d20'></i> Activate unit (3D6)</button>
+            <button onclick="ballPosition(8, 1)" class="button" ><i class='fa-solid fa-football'></i> Ball Position</button>
+            <button onclick="activate1d6()" class="button" ><i class='fa-solid fa-football'></i> Pick up ball</button>
+            <button onclick="distance(12, 1)" class="button" ><i class='fas fa-ruler'></i> Throw ball</button>
+            <button onclick="attack(6, 2)" class="button" ><i class='fa-solid fa-hand-back-fist'></i> Attack/Defense</button>
+            <a href="#" ><button class="button" ><i class='fa fa-users'></i> Teams</button></a>
+ 
+        <hr>            
+        <div id="result"></div>
+        <br>
+        <hr>
+        <footer>
+            The rules for the game can be found: <a href="https://drive.google.com/file/d/15PjVytZnvPBJ-3gqf0oBW9i0AJnCIBI1/view?usp=drive_link" target="_blank" >Here</a><br>
+            Original project and tutorial: <a href="https://www.youtube.com/watch?v=9JjjpqZkfN4" target="_blank" >Here</a><br>
+            Developed by: <a href="https://github.com/jpradoar" target="_blank" >Jtan</a>
+        </footer>
+    </div> 
+    <br>
+    
+    <script>
+        function generateRandomNumbers(dice_type, dice_numbers) {
+            let results = [];
+            for (let i = 0; i < dice_numbers; i++) {
+                results.push(Math.floor(Math.random() * dice_type) + 1);
+            }
+            return results;
+        }
+
+        function activate1d6() {
+            const random_numbers = generateRandomNumbers(6, 1);
+            document.getElementById("result").innerHTML = " Pick up! (<i class='fas fa-dice'></i> <b>></b> unit skill)<h2>" + random_numbers.join(", ") + "</h2><br><i class='fa-solid fa-football'></i>";          
+        }
+
+        function activate2d6(dice_type, dice_numbers) {
+            const random_numbers = generateRandomNumbers(dice_type, dice_numbers);
+            document.getElementById("result").innerHTML = "Activations <i class='fas fa-dice'></i> 4+<h2>" + random_numbers.join(", ") + "</h2>";
+            const img = document.createElement("img");
+            img.src = "img/activation.png"; 
+            img.classList.add("small"); 
+            document.getElementById("result").appendChild(img);                
+        }
+
+        function activate3d6(dice_type, dice_numbers) {
+            const random_numbers = generateRandomNumbers(dice_type, dice_numbers);
+            document.getElementById("result").innerHTML = "Activations <i class='fas fa-dice'></i> 4+<h2>" + random_numbers.join(", ") + "</h2>";
+            const img = document.createElement("img");
+            img.src = "img/activation2.png";
+            img.classList.add("small"); 
+            document.getElementById("result").appendChild(img);            
+        }
+
+        function ballPosition(dice_type, dice_numbers) {
+            const random_numbers = generateRandomNumbers(dice_type, dice_numbers);
+            const ballPositionNumber = generateRandomNumbers(3, 1);
+            const resultElement = document.getElementById("result");
+            
+            resultElement.innerHTML = "Ball position | Ball distance: <br><h2>" + random_numbers[0] + " | " + ballPositionNumber +" </h2>";
+            const img = document.createElement("img");
+            img.src = "img/ball-position.png";
+            resultElement.appendChild(img);
+
+            const DescriptionImg = document.createElement("div");
+            DescriptionImg.textContent = "Position";
+            resultElement.appendChild(DescriptionImg);
+        }
+
+        function distance(dice_type, dice_numbers) {
+            const random_numbers = generateRandomNumbers(dice_type, dice_numbers);
+            document.getElementById("result").innerHTML = "Distance: <h2>" + random_numbers[0] + "</h2>";
+            const img = document.createElement("img");
+            img.src = "img/shooting.png";
+            document.getElementById("result").appendChild(img);
+        }
+
+        function attack(dice_type, dice_numbers) {
+            const random_numbers = generateRandomNumbers(dice_type, dice_numbers);
+            document.getElementById("result").innerHTML = "Attack | Defense: <h2>" + random_numbers.join(" | ") + "</h2><i class='fa-solid fa-hand-back-fist'></i> | <i class='fa-solid fa-shield-halved'></i>";
+        }   
+    </script>
+
+</body>
+</html>
