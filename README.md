@@ -1,2 +1,4 @@
 # opr-deathball
-Onepagerules - Deathball
+
+
+This is a simple aplication to play Onepagerules - Deathball
